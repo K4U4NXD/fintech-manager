@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FINTECH MANAGER - Personal Finance Management</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">FINTECH MANAGER</a>
+            
+            <ul class="nav-menu guest-only">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-user">
+                <div class="guest-only">
+                    <a href="html/login.html" class="btn btn-outline">Login</a>
+                    <a href="html/register.html" class="btn btn-primary">Sign Up</a>
+                </div>
+                
+                <div class="user-only" style="display: none;">
+                    <button class="notification-bell" onclick="toggleNotifications()">
+                        🔔
+                        <span class="notification-count">0</span>
+                    </button>
+                    <a href="html/dashboard.html" class="btn btn-primary">Dashboard</a>
+                    <button onclick="logout()" class="btn btn-outline">Logout</button>
+                </div>
+            </div>
+            
+            <button class="menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="html/login.html">Login</a></li>
+            <li><a href="html/register.html">Sign Up</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero" style="background: linear-gradient(135deg, var(--primary-blue), var(--primary-green)); color: white; padding: 5rem 0; text-align: center;">
+            <div class="container">
+                <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Take Control of Your Finances</h1>
+                <p style="font-size: 1.25rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    FINTECH MANAGER helps you track expenses, manage budgets, set savings goals, and achieve financial freedom with powerful analytics and insights.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="html/register.html" class="btn btn-warning" style="font-size: 1.1rem; padding: 1rem 2rem;">Get Started Free</a>
+                    <a href="#features" class="btn btn-outline" style="font-size: 1.1rem; padding: 1rem 2rem; border-color: white; color: white;">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" style="padding: 5rem 0;">
+            <div class="container">
+                <h2 class="text-center mb-5">Powerful Features for Smart Money Management</h2>
+                
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card text-center" style="height: 100%;">
+                            <div class="card-body">
+                                <div style="font-size: 3rem; color: var(--primary-blue); margin-bottom: 1rem;">📊</div>
+                                <h4>Smart Dashboard</h4>
+                                <p>Get a complete overview of your finances with interactive charts, summary cards, and real-time insights.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-4">
+                        <div class="card text-center" style="height: 100%;">
+                            <div class="card-body">
+                                <div style="font-size: 3rem; color: var(--primary-green); margin-bottom: 1rem;">💰</div>
+                                <h4>Expense Tracking</h4>
+                                <p>Easily categorize and track all your income and expenses with custom tags and detailed notes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-4">
+                        <div class="card text-center" style="height: 100%;">
+                            <div class="card-body">
+                                <div style="font-size: 3rem; color: var(--primary-yellow); margin-bottom: 1rem;">🎯</div>
+                                <h4>Budget Management</h4>
+                                <p>Set budgets for different categories and get alerts when you're approaching your limits.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <div class="card text-center" style="height: 100%;">
+                            <div class="card-body">
+                                <div style="font-size: 3rem; color: var(--primary-blue); margin-bottom: 1rem;">🏆</div>
+                                <h4>Savings Goals</h4>
+                                <p>Set and track progress towards your financial goals with visual progress indicators.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-4">
+                        <div class="card text-center" style="height: 100%;">
+                            <div class="card-body">
+                                <div style="font-size: 3rem; color: var(--primary-green); margin-bottom: 1rem;">📈</div>
+                                <h4>Detailed Reports</h4>
+                                <p>Generate comprehensive reports and export data in Excel, CSV, or PDF formats.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-4">
+                        <div class="card text-center" style="height: 100%;">
+                            <div class="card-body">
+                                <div style="font-size: 3rem; color: var(--primary-yellow); margin-bottom: 1rem;">🔔</div>
+                                <h4>Smart Notifications</h4>
+                                <p>Stay informed with intelligent alerts for budget limits, goal achievements, and reminders.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section style="background: var(--light-gray); padding: 4rem 0;">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-3">
+                        <h3 style="color: var(--primary-blue); font-size: 3rem; margin-bottom: 0.5rem;">10K+</h3>
+                        <p style="color: var(--text-gray);">Active Users</p>
+                    </div>
+                    <div class="col-3">
+                        <h3 style="color: var(--primary-green); font-size: 3rem; margin-bottom: 0.5rem;">$2M+</h3>
+                        <p style="color: var(--text-gray);">Money Managed</p>
+                    </div>
+                    <div class="col-3">
+                        <h3 style="color: var(--primary-yellow); font-size: 3rem; margin-bottom: 0.5rem;">50K+</h3>
+                        <p style="color: var(--text-gray);">Transactions Tracked</p>
+                    </div>
+                    <div class="col-3">
+                        <h3 style="color: var(--primary-blue); font-size: 3rem; margin-bottom: 0.5rem;">95%</h3>
+                        <p style="color: var(--text-gray);">User Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" style="padding: 5rem 0;">
+            <div class="container">
+                <div class="row align-center">
+                    <div class="col-6">
+                        <h2>Why Choose FINTECH MANAGER?</h2>
+                        <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                            Our platform combines powerful financial tracking tools with an intuitive interface, 
+                            making it easy for anyone to take control of their finances.
+                        </p>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">✓ Secure & Private</h4>
+                            <p>Your financial data is encrypted and protected with bank-level security.</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">✓ Easy to Use</h4>
+                            <p>Intuitive design that makes financial management simple and enjoyable.</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="color: var(--primary-yellow); margin-bottom: 0.5rem;">✓ Comprehensive</h4>
+                            <p>All the tools you need in one place - tracking, budgeting, goals, and reports.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-6">
+                        <div style="background: var(--light-gray); padding: 3rem; border-radius: 12px; text-align: center;">
+                            <div style="font-size: 8rem; margin-bottom: 1rem;">📱</div>
+                            <h3>Mobile Responsive</h3>
+                            <p>Access your finances anywhere, anytime with our fully responsive design.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section style="background: linear-gradient(135deg, var(--primary-green), var(--primary-blue)); color: white; padding: 4rem 0; text-align: center;">
+            <div class="container">
+                <h2 style="margin-bottom: 1rem;">Ready to Take Control of Your Finances?</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    Join thousands of users who have already transformed their financial lives with FINTECH MANAGER.
+                </p>
+                <a href="html/register.html" class="btn btn-warning" style="font-size: 1.2rem; padding: 1rem 2.5rem;">
+                    Start Your Free Account Today
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" style="padding: 4rem 0;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Get in Touch</h3>
+                        <p style="margin-bottom: 2rem;">
+                            Have questions? We're here to help you succeed with your financial goals.
+                        </p>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <strong>Email:</strong> support@fintechmanager.com
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>Phone:</strong> +1 (555) 123-4567
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>Address:</strong> 123 Finance Street, Money City, FC 12345
+                        </div>
+                    </div>
+                    
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>Send us a Message</h4>
+                                <form id="contact">
+                                    <div class="form-group">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Message</label>
+                                        <textarea class="form-control" rows="4" required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Send Message</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: var(--primary-black); color: white; padding: 3rem 0; text-align: center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <h5>FINTECH MANAGER</h5>
+                    <p>Your trusted partner in personal finance management.</p>
+                </div>
+                <div class="col-4">
+                    <h5>Quick Links</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem;"><a href="#features" style="color: white; text-decoration: none;">Features</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#about" style="color: white; text-decoration: none;">About</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="html/login.html" style="color: white; text-decoration: none;">Login</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="html/register.html" style="color: white; text-decoration: none;">Sign Up</a></li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <h5>Follow Us</h5>
+                    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" style="color: white; font-size: 1.5rem;">📘</a>
+                        <a href="#" style="color: white; font-size: 1.5rem;">🐦</a>
+                        <a href="#" style="color: white; font-size: 1.5rem;">📷</a>
+                        <a href="#" style="color: white; font-size: 1.5rem;">💼</a>
+                    </div>
+                </div>
+            </div>
+            <hr style="margin: 2rem 0; border-color: var(--text-gray);">
+            <p>&copy; 2024 FINTECH MANAGER. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Handle contact form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.querySelector('#contact form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(this);
+                    const submitButton = this.querySelector('button[type="submit"]');
+                    
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Sending...';
+                    
+                    fetch('php/contact.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(data.message);
+                            this.reset();
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again.');
+                    })
+                    .finally(() => {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Send Message';
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

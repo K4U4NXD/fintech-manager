@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FINTECH MANAGER</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="../index.html" class="logo">FINTECH MANAGER</a>
+                <div class="nav-user">
+                    <a href="register.html" class="btn btn-outline">Sign Up</a>
+                    <a href="../index.html" class="btn btn-primary">Home</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="row justify-center">
+                <div class="col-6" style="max-width: 400px;">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <h2 class="card-title">Welcome Back</h2>
+                            <p style="color: var(--text-gray); margin: 0;">Sign in to your account</p>
+                        </div>
+                        <div class="card-body">
+                            <!-- Alert Container for login feedback -->
+                            <div id="alertContainer"></div>
+                            
+                            <form id="loginForm" novalidate>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" id="email" name="email" class="form-control" required autocomplete="email" placeholder="Enter your email">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" id="password" name="password" class="form-control" required autocomplete="current-password" placeholder="Enter your password">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <input type="checkbox" name="remember_me">
+                                        <span>Remember me</span>
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                    Login
+                                </button>
+                            </form>
+                            
+                            <div style="text-align: center; margin-top: 1.5rem;">
+                                <a href="forgot-password.html" style="color: var(--primary-blue); text-decoration: none;">
+                                    Forgot your password?
+                                </a>
+                            </div>
+                            
+                            <hr style="margin: 2rem 0;">
+                            
+                            <div style="text-align: center;">
+                                <p style="margin-bottom: 1rem;">Don't have an account?</p>
+                                <a href="register.html" class="btn btn-outline" style="width: 100%;">
+                                    Create Account
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

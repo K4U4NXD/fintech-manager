@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgets - FINTECH MANAGER</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="../index.html" class="logo">FINTECH MANAGER</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="transactions.html" class="nav-link">Transactions</a></li>
+                    <li><a href="budgets.html" class="nav-link active">Budgets</a></li>
+                    <li><a href="goals.html" class="nav-link">Goals</a></li>
+                    <li><a href="reports.html" class="nav-link">Reports</a></li>
+                </ul>
+                
+                <div class="nav-user">
+                    <button class="notification-bell">
+                        🔔
+                        <span class="notification-count">0</span>
+                    </button>
+                    <a href="profile.html" class="nav-link">Profile</a>
+                    <button onclick="logout()" class="btn btn-outline">Logout</button>
+                </div>
+                
+                <button class="menu-toggle">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="transactions.html">Transactions</a></li>
+            <li><a href="budgets.html">Budgets</a></li>
+            <li><a href="goals.html">Goals</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Alert Container -->
+            <div id="alertContainer"></div>
+            
+            <!-- Page Header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <h1>Budget Management</h1>
+                    <p style="color: var(--text-gray); margin: 0;">Set and track your spending limits by category</p>
+                </div>
+                <button onclick="showModal('budgetModal')" class="btn btn-primary">
+                    + Create Budget
+                </button>
+            </div>
+
+            <!-- Budget Overview Cards -->
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-value" id="totalBudgets">0</div>
+                    <div class="summary-label">Active Budgets</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" id="totalBudgetAmount">$0.00</div>
+                    <div class="summary-label">Total Budget</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" id="totalSpent">$0.00</div>
+                    <div class="summary-label">Total Spent</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" id="budgetRemaining">$0.00</div>
+                    <div class="summary-label">Remaining</div>
+                </div>
+            </div>
+
+            <!-- Budget Cards Grid -->
+            <div id="budgetsGrid" class="row">
+                <!-- Budget cards will be loaded here -->
+            </div>
+
+            <!-- No Budgets Message -->
+            <div id="noBudgetsMessage" class="card text-center" style="display: none;">
+                <div class="card-body" style="padding: 3rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🎯</div>
+                    <h3>No Budgets Created Yet</h3>
+                    <p style="color: var(--text-gray); margin-bottom: 2rem;">
+                        Start managing your finances by creating your first budget. Set spending limits for different categories to stay on track.
+                    </p>
+                    <button onclick="showModal('budgetModal')" class="btn btn-primary">
+                        Create Your First Budget
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Budget Modal -->
+    <div id="budgetModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create Budget</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="budgetForm">
+                    <input type="hidden" name="id" value="">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Category *</label>
+                        <select name="category" class="form-control form-select" required>
+                            <option value="">Select Category</option>
+                            <option value="Food">Food</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Budget Limit *</label>
+                        <input type="number" name="budget_limit" class="form-control" step="0.01" min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Start Date *</label>
+                        <input type="date" name="start_date" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">End Date *</label>
+                        <input type="date" name="end_date" class="form-control" required>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <strong>Tip:</strong> Set realistic budgets based on your spending history. You can always adjust them later.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                <button type="submit" form="budgetForm" class="btn btn-primary">Save Budget</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirm Delete</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this budget? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                <button type="button" id="confirmDeleteBtn" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/budgets.js"></script>
+</body>
+</html>

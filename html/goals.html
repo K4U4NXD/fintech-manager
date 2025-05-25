@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings Goals - FINTECH MANAGER</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="../index.html" class="logo">FINTECH MANAGER</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="transactions.html" class="nav-link">Transactions</a></li>
+                    <li><a href="budgets.html" class="nav-link">Budgets</a></li>
+                    <li><a href="goals.html" class="nav-link active">Goals</a></li>
+                    <li><a href="reports.html" class="nav-link">Reports</a></li>
+                </ul>
+                
+                <div class="nav-user">
+                    <button class="notification-bell">
+                        🔔
+                        <span class="notification-count">0</span>
+                    </button>
+                    <a href="profile.html" class="nav-link">Profile</a>
+                    <button onclick="logout()" class="btn btn-outline">Logout</button>
+                </div>
+                
+                <button class="menu-toggle">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="transactions.html">Transactions</a></li>
+            <li><a href="budgets.html">Budgets</a></li>
+            <li><a href="goals.html">Goals</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Alert Container -->
+            <div id="alertContainer"></div>
+            
+            <!-- Page Header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <h1>Savings Goals</h1>
+                    <p style="color: var(--text-gray); margin: 0;">Set and track your financial goals</p>
+                </div>
+                <button onclick="showModal('goalModal')" class="btn btn-primary">
+                    + Create Goal
+                </button>
+            </div>
+
+            <!-- Goals Overview Cards -->
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-value" id="totalGoals">0</div>
+                    <div class="summary-label">Active Goals</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" id="totalTargetAmount">$0.00</div>
+                    <div class="summary-label">Total Target</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" id="totalSavedAmount">$0.00</div>
+                    <div class="summary-label">Total Saved</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" id="averageProgress">0%</div>
+                    <div class="summary-label">Average Progress</div>
+                </div>
+            </div>
+
+            <!-- Goals Grid -->
+            <div id="goalsGrid" class="row">
+                <!-- Goal cards will be loaded here -->
+            </div>
+
+            <!-- No Goals Message -->
+            <div id="noGoalsMessage" class="card text-center" style="display: none;">
+                <div class="card-body" style="padding: 3rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🏆</div>
+                    <h3>No Goals Created Yet</h3>
+                    <p style="color: var(--text-gray); margin-bottom: 2rem;">
+                        Start achieving your financial dreams by setting your first savings goal. Whether it's for a vacation, emergency fund, or a new car, we'll help you track your progress.
+                    </p>
+                    <button onclick="showModal('goalModal')" class="btn btn-primary">
+                        Create Your First Goal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Goal Modal -->
+    <div id="goalModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create Savings Goal</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="goalForm">
+                    <input type="hidden" name="id" value="">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Goal Title *</label>
+                        <input type="text" name="title" class="form-control" placeholder="e.g., Emergency Fund, Vacation, New Car" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Target Amount *</label>
+                        <input type="number" name="target_amount" class="form-control" step="0.01" min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Current Amount</label>
+                        <input type="number" name="current_amount" class="form-control" step="0.01" min="0" value="0">
+                        <small style="color: var(--text-gray);">How much have you already saved towards this goal?</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Target Date *</label>
+                        <input type="date" name="target_date" class="form-control" required>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <strong>Tip:</strong> Set realistic and specific goals. Break down large goals into smaller milestones to stay motivated!
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                <button type="submit" form="goalForm" class="btn btn-primary">Save Goal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Money Modal -->
+    <div id="addMoneyModal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Money to Goal</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addMoneyForm">
+                    <input type="hidden" name="goal_id" value="">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Amount to Add *</label>
+                        <input type="number" name="amount" class="form-control" step="0.01" min="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Note (optional)</label>
+                        <input type="text" name="note" class="form-control" placeholder="e.g., Monthly savings, Bonus money">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                <button type="submit" form="addMoneyForm" class="btn btn-success">Add Money</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirm Delete</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this goal? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                <button type="button" id="confirmDeleteBtn" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/goals.js"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - FINTECH MANAGER</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="../index.html" class="logo">FINTECH MANAGER</a>
+                
+                <ul class="nav-menu">
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="transactions.html" class="nav-link">Transactions</a></li>
+                    <li><a href="budgets.html" class="nav-link">Budgets</a></li>
+                    <li><a href="goals.html" class="nav-link">Goals</a></li>
+                    <li><a href="reports.html" class="nav-link active">Reports</a></li>
+                </ul>
+                
+                <div class="nav-user">
+                    <button class="notification-bell">
+                        🔔
+                        <span class="notification-count">0</span>
+                    </button>
+                    <a href="profile.html" class="nav-link">Profile</a>
+                    <button onclick="logout()" class="btn btn-outline">Logout</button>
+                </div>
+                
+                <button class="menu-toggle">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="transactions.html">Transactions</a></li>
+            <li><a href="budgets.html">Budgets</a></li>
+            <li><a href="goals.html">Goals</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Alert Container -->
+            <div id="alertContainer"></div>
+            
+            <!-- Page Header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <h1>Financial Reports</h1>
+                    <p style="color: var(--text-gray); margin: 0;">Analyze your financial data with detailed reports and insights</p>
+                </div>
+                <div class="export-buttons">
+                    <button onclick="exportReport('csv')" class="btn btn-outline">Export CSV</button>
+                    <button onclick="exportReport('xlsx')" class="btn btn-success">Export Excel</button>
+                    <button onclick="exportChart()" class="btn btn-primary">Export Chart</button>
+                </div>
+            </div>
+
+            <!-- Report Filters -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="card-title">Report Filters</h3>
+                </div>
+                <div class="card-body">
+                    <form id="reportFiltersForm" class="row">
+                        <div class="col-3">
+                            <label class="form-label">Report Type</label>
+                            <select name="report_type" class="form-control form-select">
+                                <option value="summary">Summary Report</option>
+                                <option value="detailed">Detailed Report</option>
+                                <option value="category">Category Analysis</option>
+                                <option value="monthly">Monthly Trends</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-3">
+                            <label class="form-label">Date Range</label>
+                            <select name="date_range" class="form-control form-select" onchange="toggleCustomDates(this.value)">
+                                <option value="this_month">This Month</option>
+                                <option value="last_month">Last Month</option>
+                                <option value="this_year">This Year</option>
+                                <option value="last_year">Last Year</option>
+                                <option value="last_6_months">Last 6 Months</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-2" id="startDateGroup" style="display: none;">
+                            <label class="form-label">Start Date</label>
+                            <input type="date" name="start_date" class="form-control">
+                        </div>
+                        
+                        <div class="col-2" id="endDateGroup" style="display: none;">
+                            <label class="form-label">End Date</label>
+                            <input type="date" name="end_date" class="form-control">
+                        </div>
+                        
+                        <div class="col-2">
+                            <label class="form-label">&nbsp;</label>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Generate Report</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Report Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card income">
+                    <div class="summary-value" id="reportIncome">$0.00</div>
+                    <div class="summary-label">Total Income</div>
+                </div>
+                <div class="summary-card expense">
+                    <div class="summary-value" id="reportExpense">$0.00</div>
+                    <div class="summary-label">Total Expenses</div>
+                </div>
+                <div class="summary-card balance">
+                    <div class="summary-value" id="reportBalance">$0.00</div>
+                    <div class="summary-label">Net Income</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" id="reportTransactions">0</div>
+                    <div class="summary-label">Transactions</div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="row">
+                <div class="col-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" id="mainChartTitle">Income vs Expenses Over Time</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="mainChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Category Breakdown</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="categoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Report Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title" id="reportTableTitle">Detailed Report</h3>
+                </div>
+                <div class="card-body">
+                    <div id="loadingSpinner" class="spinner" style="display: none;"></div>
+                    
+                    <div id="reportContent">
+                        <!-- Report content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/reports.js"></script>
+</body>
+</html>
